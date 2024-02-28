@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  web:
+    container_name: go-backend
+    build: .
+    env_file:
+      - .docker.env
+    ports:
+      - "3001:3001"
+    volumes:
+      - .:/usr/src/app
+    command: air ./src/main.go -b 0.0.0.0
+    
