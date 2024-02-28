@@ -1,6 +1,7 @@
 package main
 
 import (
+	"go-backend/src/api"
 	"os"
 
 	"github.com/gofiber/fiber/v2"
@@ -14,15 +15,11 @@ func main() {
 		AllowHeaders: "Origin, Content-Type, Accept",
 	}))
 
-	app.Get("/health", healthCheck)
+	api.SetupApi(app)
 
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "3000"
 	}
 	app.Listen(":" + port)
-}
-
-func healthCheck(c *fiber.Ctx) error {
-	return c.Status(200).SendString("DUPAAA")
 }
